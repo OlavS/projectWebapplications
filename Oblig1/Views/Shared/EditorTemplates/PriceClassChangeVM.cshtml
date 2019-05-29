@@ -1,0 +1,16 @@
+﻿@model Model.ViewModels.PriceClassChangeVM
+
+<tr class="d-flex">
+    <td class="col-6">
+        @Html.DisplayFor(model => model.Id)
+        @Html.HiddenFor(model => model.Id)
+    </td>
+    <td class="col-3">
+        @Html.DisplayFor(model => model.Price) kr
+        @Html.HiddenFor(model => model.Price)
+    </td>
+    <td class="col-3">
+        @Html.EditorFor(model => model.NewPrice, new { htmlAttributes = new { @class = "form-control form-control-sm w-75" } })
+        @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
+    </td>
+</tr>

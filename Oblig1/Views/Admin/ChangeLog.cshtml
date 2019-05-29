@@ -1,0 +1,76 @@
+﻿@model List<Model.ViewModels.ChangeLogVM>
+
+@{
+    ViewBag.Title = "ChangeLog";
+}
+
+@section viewTitle{
+    <h2>Endringslogg Database</h2>
+}
+
+@section SearchField{
+    <div id="sidebarSearch">
+        <div class="searchTitle">
+            <p>Søkefelt:</p>
+        </div>
+        @using (Html.BeginForm("SearchChangeLog", "Admin", FormMethod.Post))
+        {
+            @Html.TextBox("searchString", "", new
+            {
+                @class = "form-control",
+                @placeholder = "Search i log",
+                @type = "search",
+                @id = "searchField",
+                name = "searchField"
+            })
+        }
+    </div>
+}
+
+<div class="container adminContainer adminTableContainer">
+    <table id="ChangeLogTable" class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].DateChanged)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].EntityName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PrimaryKeyValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].PropertyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].OldValue)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].NewValue)
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateChanged)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EntityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PrimaryKeyValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PropertyName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OldValue)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NewValue)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

@@ -1,0 +1,184 @@
+﻿@model List<Model.ViewModels.ExpandedOrderVM>
+
+@{
+    ViewBag.Title = "Orders";
+    TempData["ExpandedOrderVM"] = Model;
+}
+
+@section viewTitle {
+    <h2>Ordre</h2>
+}
+
+@section SearchField{
+    <div id="sidebarSearch">
+        <div class="searchTitle">
+            <p>Søkefelt:</p>
+        </div>
+        @using (Html.BeginForm("SearchOrders", "Admin", FormMethod.Post))
+        {
+            @Html.TextBox("searchString", "", new
+            {
+                @class = "form-control",
+                @placeholder = "Search i ordre",
+                @type = "search",
+                @id = "searchField",
+                name = "searchField"
+            })
+        }
+    </div>
+}
+
+<div class="container adminContainer adminTableContainer">
+    <table id="OrdersTable" class="table">
+        <tr>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Order.OrderNr)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].SurName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Order.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Order.TotalPrice)
+            </th>
+            <th></th>
+        </tr>
+        @{
+            int numerate = 0;
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <button class="btn btn-dark btn-sm" type="button" data-toggle="modal" data-target="#modalFilms@{@item.Order.OrderNr}">Filmer</button>
+                    <div class="modal fade" id="modalFilms@{@item.Order.OrderNr}" tabindex="-1" role="dialog" aria-labelledby="modalFilmsLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg modal-dialog-centered">
+                            <div class="modal-content bg-notSoDark" id="modal1Body">
+                                <div class="modal-header border-bottom p-0 pb-1 mb-1">
+                                    <h4 class="modal-title ml-2">Filmer</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <table class="table">
+                                        <tr>
+                                            <th>
+                                                <span class="float-left">@Html.DisplayNameFor(model => item.Order.OrderLines[0].Title)</span>
+                                            </th>
+                                            <th>
+                                                @Html.DisplayNameFor(model => item.Order.OrderLines[0].Price)
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                        @foreach (var film in item.Order.OrderLines)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => film.Title)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => film.Price)
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-dark btn-sm" href="#" data-toggle="modal" data-target="#refundFilmModal@{@numerate}">Refunder film</a>
+                                                </td>
+                                            </tr>
+                                            numerate++;
+
+                                        }
+                                    </table>
+                                </div>
+                                <button type="button" class="btn filmModalClose" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.TotalPrice)
+                </td>
+                <td>
+                    <div class="modal fade" id="refundOrderModal@{@item.Order.OrderNr}" tabindex="-1" role="dialog" aria-labelledby="refundOrderModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-sm modal-dialog-centered">
+                            <div class="modal-content bg-notSoDark" id="modal1Body">
+                                <div class="modal-header border-bottom p-0 pb-1 mb-1">
+                                    <h4 class="modal-title ml-2">Bekreftelse</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="col mt-2">Er du sikker på at du vil slette ordren med ordrenummer @item.Order.OrderNr?</div>
+                                    <div class="row mt-4">
+                                        <div class="col">
+                                            @Html.ActionLink("Bekreft", "RefundOrder", "Admin", new { ordernr = item.Order.OrderNr }, new { @class = "btn btn-dark btn-sm" })
+                                        </div>
+                                       <div class="col">
+                                           <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Avbryt</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn filmModalClose" data-dismiss="modal">&times;</button>
+                            </div>
+                        </div>
+                      </div>
+                      <div class="btn-group flex-wrap">
+                        @Html.ActionLink("Kunde", "SearchUsers", "Admin", new { searchString = item.Email }, new { @class = "btn btn-dark btn-sm" })
+                        <a class="btn btn-dark btn-sm" href="#" data-toggle="modal" data-target="#refundOrderModal@{@item.Order.OrderNr}">Refunder ordre</a>
+                      </div>
+                </td>
+            </tr>
+        }
+    </table>
+    @{
+        numerate = 0;
+    }
+    @foreach (var item in Model)
+    {
+        foreach (var film in item.Order.OrderLines)
+        {
+            <div class="modal fade" id="refundFilmModal@{@numerate}" tabindex="-1" role="dialog" aria-labelledby="refundFilmModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-sm modal-dialog-centered">
+                    <div class="modal-content bg-notSoDark" id="modal1Body">
+                        <div class="modal-header border-bottom p-0 pb-1 mb-1">
+                            <h4 class="modal-title ml-2">Bekreftelse</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col mt-2">
+                                Er du sikker på at du vil slette @film.Title fra ordrenummer @item.Order.OrderNr?
+                            </div>
+                            <div class="row mt-4">
+                                <div class="col">
+                                    @Html.ActionLink("Bekreft", "RefundFilm", "Admin", new { ordernr = item.Order.OrderNr, title = film.Title }, new { @class = "btn btn-dark btn-sm" })
+                                </div>
+                                <div class="col">
+                                    <button type="button" class="btn btn-dark btn-sm" data-dismiss="modal">Avbryt</button>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn filmModalClose" data-dismiss="modal">&times;</button>
+                    </div>
+                </div>
+            </div>
+            numerate++;
+        }
+    }
+</div>

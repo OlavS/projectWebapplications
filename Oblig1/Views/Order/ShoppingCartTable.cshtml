@@ -1,0 +1,47 @@
+﻿@*
+    En partiell visning av handlekurven, vises både på betalingssiden og på
+    handlekurv siden. Kunden har mulighet til å fjerne filmer fra listen direkte
+    fra dette viewet. Hvis kunden gjør det mens han/hun er på betalingssiden vil
+    han/hun sendes til handlekurven.
+*@
+
+@model List<Model.ViewModels.ShoppingCartVM>
+
+<div class="handlekurvWrapper">
+    <table id="handlekurvTabell" class="table table-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Title)
+            </th>
+            <th>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model[0].Title)
+            </th>
+            <th>
+            </th>
+        </tr>
+        @{ int sum = 0; }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.ImgURL)" alt="" width="100" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price),-
+                </td>
+                <td>
+                    @Html.ActionLink("Fjern", "RemoveFilmFromShoppingCart", new { id = item.Id }, new { @class = "btn btn-secondary btn-sm" })
+                </td>
+            </tr>
+            sum += item.Price;
+        }
+    </table>
+</div>
+<div class="font-weight-bold mt-1 float-right">
+    Totalpris: @sum kr
+</div>

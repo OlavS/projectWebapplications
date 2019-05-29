@@ -1,0 +1,42 @@
+﻿@using Model.ViewModels
+
+@model bool
+
+@{
+    ViewBag.Title = "ShoppingCart";
+    UserVM kunde = (UserVM)HttpContext.Current.Session["Kunde"];
+}
+
+<h2>Handlekurv</h2>
+<hr />
+@*
+    Dersom det ligger noe i handlekurven vil ShoppingCartTable rendres og vises sammen med en
+    knapp som sender brukeren til Payment.cshtml.
+
+    Hvis det ikke finnes noe i handlekurven vil en melding vises. Hvis kunden i tillegg ikke
+    er logget inn vil han/hun få beskjed om å logge inn før bestilling og en knapp til
+    innloggingsmodalen og registreringssiden vil vises.
+*@
+@if (Model)
+{
+    Html.RenderAction("ShoppingCartTable", "Order");
+    <div class="mt-2">
+        @Html.ActionLink("Gå til betaling", "Payment", "Order", null, new { @class = "btn btn-dark" })
+    </div>
+}
+else
+{
+    <h6 class="mt-5 mb-5">Handlekurven er tom!</h6>
+    if (kunde == null)
+    {
+        <div class="mt-5 mb-5">Vennligst logg inn før bestilling</div>
+        <div class="btn-toolbar mt-5 mb-5" role="toolbar" aria-label="handlekurvToolbar">
+            <div class="btn-group mr-5" role="group">
+                <a class="btn btn-dark" href="#" data-toggle="modal" data-target="#loggInnModal">Logg inn</a>
+            </div>
+            <div class="btn-group mr-5" role="group">
+                @Html.ActionLink("Registrer bruker", "RegisterUser", "User", null, new { @class = "btn btn-dark" })
+            </div>
+        </div>
+    }
+}

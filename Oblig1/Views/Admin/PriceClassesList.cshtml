@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Model.ViewModels.PriceClassVM>
+
+@{
+    ViewBag.Title = "ListPriceClasses";
+}
+
+@section viewTitle {
+    <h2>Prisklasser</h2>
+    }
+
+<div class="adminSmallContainer">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Id)
+                        </th>
+                        <th scope="col">
+                            @Html.DisplayNameFor(model => model.Price)
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Price) kr
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            @Html.ActionLink("Endre Priser", "PriceClassesChange", "Admin", null, new { @class = "btn btn-dark"})
+</div>

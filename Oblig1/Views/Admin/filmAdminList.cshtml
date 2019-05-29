@@ -1,0 +1,43 @@
+﻿@model Model.ViewModels.AddFilmVM
+
+<!--https://getbootstrap.com/docs/4.0/content/tables/-->
+@{
+    string aktiver = "Deaktiver";
+    string status = "Aktiv";
+    if (@Model.Active == false)
+    {
+        aktiver = "Aktiver";
+        status = "Inaktiv";
+    }
+
+    <tr>
+        <td>
+            @Model.FilmId
+        </td>
+        <td>
+            @status
+        </td>
+        <td><img src=@Model.ImgURL style="height: auto; width: 7%; min-width: 5em; max-width: 8em"></td>
+        <td>
+            <div id="filmAdminListTitleDiv">
+                <p>@Model.Title</p>
+            </div>
+        </td>
+        <td>@Model.FilmPriceClassId</td>    
+        @{
+            string time = @Model.CreatedDate;
+            string[] times = time.Split(' ');
+        }
+        <td>@times[0] <br/> @times[1]</td>
+        <td>
+            <div class="btn-group-vertical">
+                <a href="#" class="btn btn-dark btn-sm" data-toggle="modal" onclick="FilmAdminDetails(@Model.JsonSerialize)" data-target="#showMessageModal">Detaljer</a>
+                @Html.ActionLink("Endre", "EditFilm", "Admin", new { film = @Model.FilmId }, new { @class = "btn btn-dark btn-sm" })
+                @Html.ActionLink(aktiver, "ToggleActivateFilm", new { filmId = @Model.FilmId }, new { @class = "btn btn-dark btn-sm" })
+            </div>
+        </td>
+
+    </tr>
+}
+
+@Html.Partial("ShowMessageModal")

@@ -1,0 +1,116 @@
+﻿@model Model.ViewModels.UserVM
+
+@{
+    ViewBag.Title = "RegistrerBruker";
+}
+
+@section viewTitle{
+    <h2>Brukerregistrering</h2>
+    }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="adminSmallContainer">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control form-control-sm", @autofocus = "autofocus" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SurName, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.SurName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.SurName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PostalNr, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.PostalNr, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.PostalNr, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Postal, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.Postal, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.Postal, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.PhoneNr, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.PhoneNr, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNr, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+                <div onchange="EpostEksisterer()">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger", id = "epostMelding" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div>
+                    <label>Admin</label>
+                    @Html.CheckBoxFor(model => model.Admin)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PassWord, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.PassWord, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.PassWord, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PassWordRepeat, htmlAttributes: new { @class = "control-label" })
+                        <div>
+                            @Html.EditorFor(model => model.PassWordRepeat, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                            @Html.ValidationMessageFor(model => model.PassWordRepeat, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div>
+                    <input id="registrerKnapp" type="submit" value="Opprett bruker" class="btn btn-dark" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<script src="~/Scripts/Oblig1/RegistrerBruker.js"></script>

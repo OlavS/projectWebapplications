@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Model.ViewModels.PriceClassChangeVM>
+
+@{
+    ViewBag.Title = "PriceClassesChange";
+}
+
+@section viewTitle {
+    <h2>Endre Prisklasser</h2>
+    }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="adminSmallContainer">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger"})
+        <table class="table">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-6" scope="col">
+                        @Html.DisplayNameFor(model => model.Id)
+                    </th>
+                    <th class="col-3" scope="col">
+                        @Html.DisplayNameFor(model => model.Price)
+                    </th>
+                    <th class="col-3" scope="col">
+                        @Html.DisplayNameFor(model => model.NewPrice)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @Html.EditorFor(model => model)
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col">
+                <input name="command" type="submit" value="Avbryt" class="btn btn-dark" />
+            </div>
+            <div class="col text-right">
+                <input name="command" type="submit" value="Lagre Nye Priser" class="btn btn-dark" />
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,52 @@
+﻿@model List<Model.ViewModels.AddFilmVM>
+
+@{
+    ViewBag.Title = "Filmer";
+    TempData["AddFilmVMs"] = Model;
+}
+
+@section viewTitle{
+    <h2>Filmer</h2>
+}
+
+@section SearchField{
+    <div id="sidebarSearch">
+        <div class="searchTitle">
+            <p>Søkefelt:</p>
+        </div>
+        @using (Html.BeginForm("SearchFilm", "Admin", FormMethod.Post))
+        {
+            @Html.TextBox("searchString", "", new
+            {
+                @class = "form-control",
+                @placeholder = "Søk i filmer",
+                @type = "search",
+                @id = "searchField",
+                name = "searchField"
+            })
+        }
+    </div>
+}
+
+<div class="container adminContainer">
+    @Html.ActionLink("Opprett ny film", "AddFilm", "Admin", null, new { @class = "btn btn-dark mb-2" })
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Status</th>
+                <th scope="col">Bilde</th>
+                <th scope="col">Tittel</th>
+                <th scope="col">Prisklasse</th>
+                <th scope="col">Lagt til</th>
+                <th scope="col">Redigering</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var film in Model)
+            {
+                @Html.Partial("filmAdminList", film)
+            }
+        </tbody>
+    </table>
+</div>

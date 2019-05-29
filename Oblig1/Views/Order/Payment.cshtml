@@ -1,0 +1,103 @@
+﻿@*
+    Betalingssider for ordren kunden oppretter.
+*@
+
+@model Model.ViewModels.PayVM
+
+@{
+    ViewBag.Title = "Payment";
+}
+
+<h2>Betaling</h2>
+<hr />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+<div class="row">
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardNumber, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control form-control-sm", @autofocus = "autofocus" } })
+                    @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CVC, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CVC, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.CVC, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="control-label col">Utløpsdato:</div>
+            <div class="form-group row col">
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Month, htmlAttributes: new { @class = "control-label" })
+
+                    @{
+                        List<SelectListItem> monthDropdown = new List<SelectListItem>();
+                        for (int i = 1; i <= 12; i++)
+                        {
+                            monthDropdown.Add(new SelectListItem
+                            {
+                                Text = i.ToString(),
+                                Value = i.ToString()
+                            });
+                        }
+                    }
+                    @Html.DropDownListFor(model => model.Month, monthDropdown, "", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-4">
+                    @Html.LabelFor(model => model.Year, htmlAttributes: new { @class = "control-label" })
+
+                    @{
+                        List<SelectListItem> yearDropdown = new List<SelectListItem>();
+                        var gjeldendeDato = DateTime.Now;
+                        for (int i = gjeldendeDato.Year; i < gjeldendeDato.Year + 8; i++)
+                        {
+                            yearDropdown.Add(new SelectListItem
+                            {
+                                Text = i.ToString(),
+                                Value = i.ToString()
+                            });
+                        }
+                    }
+                    @Html.DropDownListFor(model => model.Year, yearDropdown, "", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="row col">
+                <div class="col-4">
+                    @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-4">
+                    @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CardHoldersName, htmlAttributes: new { @class = "control-label col-md-10" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CardHoldersName, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.CardHoldersName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-8">
+                    <input type="submit" value="Betal" class="btn btn-dark" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-12 col-12">
+        @{
+            Html.RenderAction("ShoppingCartTable", "Order");
+        }
+    </div>
+</div>
+}

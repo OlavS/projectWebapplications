@@ -1,0 +1,117 @@
+﻿@model List<Model.ViewModels.UserVM>
+
+@{
+    ViewBag.Title = "Users";
+    TempData["UserVMs"] = Model;
+}
+
+@section viewTitle{
+    <h2>Kundeliste</h2>
+}
+
+@section SearchField{
+    <div id="sidebarSearch">
+        <div class="searchTitle">
+            <p>Søkefelt:</p>
+        </div>
+        @using (Html.BeginForm("SearchUsers", "Admin", FormMethod.Post))
+        {
+            @Html.TextBox("searchString", "", new
+            {
+                @class = "form-control",
+                @placeholder = "Search i kunder",
+                @type = "search",
+                @id = "searchField",
+                name = "searchField"
+            })
+        }
+    </div>
+}
+
+<div class="container adminContainer adminTableContainer">
+        @Html.ActionLink("Lag ny kunde", "CreateUser", "Admin", null, new { @class = "btn btn-dark mb-2" })
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].SurName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Address)
+                </th>
+                <th>
+                    Postnr:
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Postal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].PhoneNr)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model[0].CreatedDate)
+                </th>
+                <th>
+                    Adm:
+                </th>
+                <th>
+                    Redigering:
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                string line = "";
+                string aktiver = "Deaktiver";
+
+                if (item.Active == false) { line = "text-decoration:line-through"; aktiver = "Aktiver"; }
+            <tr style=@{@line}>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SurName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PostalNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Postal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNr)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                     <td>
+                        @{
+                            string time = item.CreatedDate;
+                            string[] times = time.Split(' ');
+                        }
+                        @times[0] <br/> @times[1]
+                     </td>
+                <td>
+                    @Html.CheckBoxFor(modelItem => item.Admin, new { @disabled = "disabled" })
+                </td>
+
+                <td>
+                    <div class="btn-group-vertical">
+                        @Html.ActionLink("Edit", "EditUser", new { id = item.Id }, new { @class = "btn btn-dark btn-sm" })
+                        @Html.ActionLink(aktiver, "ToggleActivateUser", new { id = item.Id }, new { @class = "btn btn-dark btn-sm" })
+                        @Html.ActionLink("Ordre", "SearchOrders", new { searchString = item.Email }, new { @class = "btn btn-dark btn-sm" })
+                    </div>
+                </td>
+            </tr>
+            }
+        </table>
+</div>

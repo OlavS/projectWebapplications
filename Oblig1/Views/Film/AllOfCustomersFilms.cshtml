@@ -1,0 +1,45 @@
+﻿@model Model.ViewModels.FilmListVM
+@using Model
+
+@{
+    ViewBag.Title = "FilmListView";
+    Session["filmListe"] = Model;
+}
+
+<div class="container filmListeBar d-flex flex-wrap align-items-end">
+    <div class="p-2">
+        <h2>@Html.DisplayFor(model => model.HeadLine)</h2>
+    </div>
+    <div class="p-2 ml-1">
+        <p>- @Html.DisplayFor(model => model.SortingText)</p>
+    </div>
+    <div class="p-2 ml-auto mb-2 dropdown bg-dark">
+        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownSorter" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Sorter</button>
+        <div class="dropdown-menu bg-dark" aria-labelledby="dropdownSorter">
+            @Html.ActionLink("Etter pris, stigende", "AllOfCustomersFilmsSorted", "Film", new { sorting = Sort.pris }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Etter pris, synkende", "AllOfCustomersFilmsSorted", "Film", new { sorting = Sort.prisHøy }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Alfabetisk", "AllOfCustomersFilmsSorted", "Film", new { sorting = Sort.alfa }, new { @class = "dropdown-item" })
+            @Html.ActionLink("Tilfeldig", "AllOfCustomersFilmsSorted", "Film", new { sorting = Sort.tilf }, new { @class = "dropdown-item" })
+        </div>
+    </div>
+</div>
+<hr class="mt-0 pt-0 pb-2" />
+
+<div class="row no-gutters">
+    @foreach (var film in Model.Films)
+    {
+
+        <div class="col-6 col-sm-4 col-md-3 col-xl-2 mb-2">
+            <div class="musaoverEffekt p-2 pb-4" data-toggle="modal" onclick="LagModal(@film.JsonSerialize)" data-target="#filmSelectModal">
+                <img class="filmThumb d-block mx-auto" src="@film.ImgURL" />
+                <div class="textover d-flex flex-column p-2">
+                    <h5>@film.Title</h5>
+                    <p>@film.Description</p>
+                    <div class="d-flex justify-content-end mt-auto">
+                        <p>Pris: @film.Price kr</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

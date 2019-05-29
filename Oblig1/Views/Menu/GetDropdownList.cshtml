@@ -1,0 +1,13 @@
+﻿@model List<Model.ViewModels.GenreVM>
+@using Model
+
+@*
+    Lager et Actionlink element for hver sjanger i listen som sendes
+    hvor linkText og actionName settes til sjangerens navn, controlleren actionen skal kalles i settes til "Film",
+    routeValue settes til null (foreløpig, mulig den skal brukes), og "dropdown-item" class taggen til Bootstrap slenges på.
+*@
+
+@foreach (var item in Model)
+{
+    @Html.ActionLink(item.Name, "GenreView", "Film", new { genreName = item.Name, sorting = Sort.alfa }, new { @class = "dropdown-item"})
+}

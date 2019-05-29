@@ -1,0 +1,153 @@
+﻿@using System.Text.RegularExpressions
+@using System.Web.Mvc.Html
+@using Model.ViewModels
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - @ViewBag.Title</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin.css" rel="stylesheet" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/Oblig1/MeldingFilmModal.js"></script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand navbar-dark fixed-top admin-Topbar">
+        <div id="adminBrand">
+            <a href="/Admin/AdminFrontPage" class="navbar-brand">Holberg <span>ADMIN</span></a>
+        </div>
+
+        <button class="btn btn-sm btn-dark sidebarToggleBtn" type="button" id="sidebarCollapse">
+            <span class="navbar-toggler-icon"></span>
+            <span class="toggleText">Navigasjon</span>
+        </button>
+
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownAdmin" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownAdmin">
+                    @Html.ActionLink("Butikk Forside", "Frontpage", "Film", null, new { @class = "dropdown-item" })
+                    @Html.ActionLink("Logg ut", "LogOut", "Admin", null, new { @class = "dropdown-item" })
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="wrapper">
+
+        <!-- SideNavigation -->
+        <nav id="sidebar">
+
+            <!-- Room for searchfunctions -->
+
+            @RenderSection("SearchField", false)
+
+            <!-- Nav Menu -->
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="/Admin/AdminFrontPage">Hjem</a>
+                </li>
+                <li>
+                    <a href="#customerDropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Kunde</a>
+                    <ul class="collapse list-unstyled" id="customerDropdown">
+                        <li>
+                            @Html.ActionLink("Opprett", "CreateUser", "Admin")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Liste", "AllUsers", "Admin")
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#filmDropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Filmer</a>
+                    <ul class="collapse list-unstyled" id="filmDropdown">
+                        <li>
+                            @Html.ActionLink("Opprett", "AddFilm", "Admin", null, new { @class = "nav-link" })
+                        </li>
+                        <li>
+                            @Html.ActionLink("Liste", "ListAllFilms", "Admin", null, new { @class = "nav-link" })
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    @Html.ActionLink("Ordre", "AllOrders", "Admin")
+                </li>
+
+                <li>
+                    <a href="#priceDropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Priser</a>
+                    <ul class="collapse list-unstyled" id="priceDropdown">
+                        <li>
+                            @Html.ActionLink("Pris", "PriceClassesList", "Admin")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Endre priser", "PriceClassesChange", "Admin")
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#logDropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Logger</a>
+                    <ul class="collapse list-unstyled" id="logDropdown">
+                        <li>
+                            @Html.ActionLink("Endringslog", "AllChangeLogs", "Admin")
+                        </li>
+                        <li>
+                            @Html.ActionLink("Feillog", "AllErrorLogs", "Admin")
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- View Content -->
+        <div id="content">
+            <!-- Bar for a views title, and message returned by temp-data -->
+            <div id="viewTitleBar">
+                <div class="row mx-0">
+                    <div class="col-12 col-md-3 align-self-end">
+                        @RenderSection("viewTitle", false)
+                    </div>
+                    <div class="col-12 col-md-9 align-self-center text-center">
+                        <h3>@TempData["message"]</h3>
+                        <p>@TempData["errormessage"]</p>
+                    </div>
+                </div>
+            </div>
+            <div id="adminView">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="~/Scripts/umd/popper.js"></script>
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <!-- Script for the sidebartoggle -->
+    <script>
+        $(document).ready(function () {
+
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar, #content').toggleClass('toggled');
+            })
+        })
+    </script>
+
+    <!-- Link for the email check field in CreateUser.cshtml -->
+    <script>
+        var AppUrl = {
+            SjekkEpost:         '@Url.Action("CheckEmail", "User")'
+        };
+    </script>
+</body>
+</html>

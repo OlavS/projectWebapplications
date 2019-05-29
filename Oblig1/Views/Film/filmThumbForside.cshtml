@@ -1,0 +1,24 @@
+﻿@model Model.ViewModels.FilmVM
+
+<div class="col-6 col-md-3">
+    <div class="filmThumb@{@Model.Id} musaoverEffekt p-2 pb-4" data-toggle="modal" onclick="LagModal(@Model.JsonSerialize)" data-target="#filmSelectModal">
+        <img class="filmThumb d-block mx-auto" src="@Model.ImgURL" />
+        <div class="textover d-flex flex-column p-2">
+            <h5>@Model.Title</h5>
+            <p>@Model.Description</p>
+            <div class="d-flex justify-content-end mt-auto">
+                <p>Pris: @Model.Price kr</p>
+            </div>
+        </div>
+        <div class="eidTextover d-flex flex-column">
+            <div class="my-auto">
+               <p>I BIBLIOTEK</p>
+            </div>
+        </div>
+        <div class="handlekurvTextover d-flex flex-column">
+            <div class="my-auto">
+                <p>I HANDLEKURV</p>
+            </div>
+        </div>
+    </div>
+</div>

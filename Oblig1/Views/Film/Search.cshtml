@@ -1,0 +1,10 @@
+﻿@model List<Model.ViewModels.FilmVM>
+
+<h2>Søkeresultat</h2>
+
+<div class="row no-gutters">
+    @foreach (var film in Model)
+    {
+        @Html.Partial("filmThumb", film)
+    }
+</div>

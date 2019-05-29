@@ -1,0 +1,80 @@
+﻿@model Model.ViewModels.AddFilmVM
+
+@{
+    ViewBag.Title = "EditFilm";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.FilmId)
+    <h2>Endre film</h2>
+    <hr />
+    <div class="form">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control form-control-sm", @autofocus = "autofocus" } })
+                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.PriceId, htmlAttributes: new { @class = "control-label" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.PriceId, new SelectList(@Model.PriceSelectList, "Value", "Text"), htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.PriceId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.GenreIDs, htmlAttributes: new { @class = "control-label" })
+                <div style="width: 18em;height:10em; overflow:auto;">
+                    <ul style="list-style:none">
+                        @foreach (var sjanger in @Model.GenreSelectList)
+                        {
+                            <li>
+                                <!--Source: https://stackoverflow.com/questions/45798817/how-to-make-check-box-selection-for-listbox-in-mvc4-razor -->
+                                <input type="checkbox"
+                                       name="GenreIDs"
+                                       value="@sjanger.Value" id="@sjanger.Value"
+                                       @{foreach (int g in @Model.CurrFilmGenreIds) { try { int id = Int32.Parse(sjanger.Value); if (g == id) { <text> checked='checked' </text>  } } catch { } } } />
+                                <label for="@sjanger">@sjanger.Text</label>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImgURL, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.EditorFor(model => model.ImgURL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.ImgURL, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>
+                <input id="editFilmButton" type="submit" value="Lagre endringer" class="btn btn-dark" />
+            </div>
+        </div>
+    </div>
+}
+@Html.ActionLink("Tilbake", "ListAllFilms", "Admin", new { @class = "btn btn-dark"})
