@@ -1,0 +1,618 @@
+﻿body {
+    background-color: #222426;
+    color: #86baba;
+}
+
+.bg-dark {
+    background-color: #222426 !important;
+}
+
+.bg-notSoDark {
+    background-color: #303336 !important;
+}
+
+a.bg-dark:hover, a.bg-dark:focus,
+button.bg-dark:hover,
+button.bg-dark:focus {
+    background-color: #1d2124 !important;
+}
+
+.forsideLenke:hover {
+    color: white;
+    text-decoration: none;
+}
+
+hr {
+    border-color: #52565b;
+}
+
+/*  TODO: Vil vi ha "hvite" overskrifter på h2 på forside og? */
+h2,
+.h2 {
+    margin-bottom: .5rem;
+    color: #dae3e3;
+    font-weight: 600;
+}
+
+/*  ===========================================================================
+        QUICKFIX AV ROTETE ADMINLAYOUT
+    =========================================================================*/
+
+#AdminFooter {
+    margin-left: 75px;
+}
+
+/*  ===========================================================================
+        BANNER
+    =========================================================================*/
+
+.banner {
+    position: relative;
+    min-height: 250px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: -30px;
+}
+
+.banner > img {
+    min-width: 1122px;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+}
+
+.banner-bildetekst {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    color: #dae3e3;
+    text-align: left;
+    text-shadow: 2px 2px 1px rgba(0, 0, 0, .8);
+}
+
+.banner-bildetekst h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 2.5rem;
+    letter-spacing: .4rem;
+    line-height: 1.2;
+}
+
+.banner-bildetekst .ekstraStorTittel {
+    font-size: 4rem;
+    letter-spacing: .5rem;
+}
+
+.banner-bildetekst .storTittel {
+    font-size: 3rem;
+    letter-spacing: .5rem;
+}
+
+.banner-bildetekst h4 {
+    line-height: 1;
+    margin-bottom: 0rem;
+    color: #86baba;
+}
+
+.banner-bildetekst p {
+    color: #86baba;
+}
+
+/*  ===========================================================================
+        FILMLISTEVISNING
+    =========================================================================*/
+
+.filmListeBar, .filmListeBar div {
+    overflow: visible;
+}
+
+.filmListeBar h2,
+.filmListeBar p {
+    margin-bottom: .5rem;
+}
+
+.filmListeBar h2 {
+    color: #dae3e3;
+    font-weight: 600;
+}
+
+.filmListeBar p {
+    font-size: 1.2rem;
+}
+
+.filmListeBar .dropdown-item {
+    color: #dae3e3;
+}
+
+.filmListeBar .dropdown-item:hover {
+    color: #fff;
+    background-color: #3c4646;
+}
+
+/*  ===========================================================================
+        FOOTER
+    =========================================================================*/
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 200px;
+}
+
+footer {
+    background: url('Images/Footer.jpg') no-repeat center bottom;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 200px;
+    color: #707070;
+}
+
+footer .medlemsListe p {
+    margin-bottom: 0;
+}
+
+footer h4 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+footer ul {
+    list-style: none;
+}
+
+footer a {
+    text-decoration: none;
+    color: rgba(134, 186, 186, 0.8);
+}
+
+footer a:hover, footer a:focus {
+    text-decoration: none;
+    color: rgba(134, 186, 186, 1);
+}
+
+footer a:disabled {
+    color: rgba(134, 186, 186, 0.3);
+}
+
+/*  ===========================================================================
+        FORM_CONTROL
+    =========================================================================*/
+
+.form-control {
+    background-color: #cccccc;
+}
+
+.form-control:focus {
+    color: #495057;
+    background-color: #fff;
+    border: #557486 solid 2px;
+    box-shadow: 0 0 2px 0.2rem rgba(136, 186, 255, 0.75);
+}
+
+/*  ===========================================================================
+        NAVBAR
+    =========================================================================*/
+
+.navbar {
+    border-bottom: 2px solid #151515;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.8);
+    -moz-box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.8);
+    box-shadow: 0px 0px 8px 5px rgba(0,0,0,0.5);
+}
+
+.navbar .navbar-collapse .navbar-nav .nav-item .dropdown-menu .dropdown-item {
+    color: #dae3e3;
+}
+
+.navbar .navbar-collapse .navbar-nav .nav-item .dropdown-menu .dropdown-item:hover {
+    color: #dae3e3;
+    background-color: #3c4646;
+}
+
+/*      Sidens "Tittelfelt"
+    =========================================================================*/
+
+.navbar-brand {
+    display: inline-block;
+    padding-top: 0rem;
+    padding-bottom: 0.3125rem;
+    margin-right: 1rem;
+    color: #86baba !important;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: .1rem;
+    line-height: 1rem;
+    white-space: nowrap;
+    text-shadow:    /*2px 2px 0 #222426,*/
+                    3px 3px 0 rgba(41, 79, 79, 1),
+                    0px 0px 6px rgba(0, 0, 0, 1);
+}
+
+.navbar-brand:hover, .navbar-brand:focus {
+    text-decoration: none;
+}
+
+/*  ===========================================================================
+        NAVBAR left admin
+    =========================================================================*/
+
+/*@media (max-width: 450px){
+    .nav-menu{
+    }
+    .renderBody {
+    }
+}*/
+
+@media (min-width: 450px) {
+    .renderBody {
+        margin-left: 150px;
+        margin-top: 10px;
+    }
+}
+
+.nav-menu {
+    height: 100%;
+    width: 120px;
+    background-color: aquamarine;
+    overflow: unset;
+    position: absolute;
+}
+.adminBody {
+    padding-top: 0px;
+}
+
+.nav-menu > .nav-pills .nav-link{
+    width: 100%;
+    box-sizing: content-box;
+}
+.nav-menu > .nav-link{
+    color:black;
+}
+.nav-menu > .nav-link:hover {
+    color: white;
+    background-color:mediumblue;
+}
+
+.nav-menu > .collapse > .card > a:hover{
+    background-color:darkolivegreen;
+    color:whitesmoke;
+}
+
+/*
+    TODO: når width er smalere enn 450 px, så blir dette hidden
+
+*/
+/*  ===========================================================================
+        TABELLER
+    =========================================================================*/
+.table-dark,
+.table-dark th,
+.table-dark td {
+    background-color: #222426;
+}
+
+.table-dark th {
+    color: #dae3e3 !important;
+}
+
+.table-dark td {
+    color: #86baba !important;
+}
+
+.table-dark-inner,
+.table-dark-inner th,
+.table-dark-inner td {
+    background-color: #303336 !important;
+}
+
+/*  ===========================================================================
+        THUMBNAILS
+    =========================================================================*/
+.filmThumb {
+    max-height: 250px;
+    height: auto;
+    max-width: 100%;
+    width: auto;
+}
+.karusellControl {
+    max-height: 250px;
+    height: auto;
+}
+
+/*      Filmen er eid
+    =========================================================================*/
+
+.filmThumbEid > img {
+    filter: grayscale(100%);
+    opacity: 0.3;
+    transition: .6s;
+}
+
+.filmThumbEid > p {
+    opacity: 0.3;
+    transition: .6s;
+}
+
+.eidTextover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.eidTextover p {
+    background: rgba(15, 15, 15, 0.6);
+    color: #707070;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #707070;
+}
+
+.filmThumbEid .eidTextover, .filmThumbEid .eidTextover p {
+    opacity: 1;
+    transition: .6s;
+}
+
+.eidTextover, .eidTextover p, .musaoverEffekt:hover .eidTextover, .musaoverEffekt:hover .eidTextover p  {
+    opacity: 0;
+}
+
+/*      Filmen er i handlekurv
+    =========================================================================*/
+
+.filmThumbHandlekurv > img {
+    filter: grayscale(50%);
+    opacity: 0.7;
+    transition: .6s;
+}
+
+.filmThumbHandlekurv > p {
+    opacity: 0.7;
+    transition: .6s;
+}
+
+.handlekurvTextover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.handlekurvTextover p {
+    background: rgba(43, 128, 62, 0.6);
+    color: #cccccc;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
+    border-top: 1px solid #2b803e;
+    border-bottom: 1px solid #2b803e;
+}
+
+.filmThumbHandlekurv .handlekurvTextover, .filmThumbHandlekurv .handlekurvTextover p {
+    opacity: 1;
+    transition: .6s;
+}
+
+.handlekurvTextover, .handlekurvTextover p, .musaoverEffekt:hover .handlekurvTextover, .musaoverEffekt:hover .handlekurvTextover p {
+    opacity: 0;
+}
+
+/*      Holde musa over filmtommel - effektene
+    =========================================================================*/
+
+.musaoverEffekt {
+    width: 100%;
+    height: 100%;
+    background-color: #222426;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.musaoverEffekt .textover {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+    top: 0;
+    left: 0;
+}
+
+.musaoverEffekt .textover h5 {
+    color: #dae3e3;
+}
+
+.musaoverEffekt .textover p {
+    font-size: 12px;
+}
+
+.musaoverEffekt .textover h5, .musaoverEffekt .textover p {
+    transform: scale(0.7);
+    transition: 0.6s;
+    opacity: 0;
+}
+
+/*      :hover til musaovereffektene
+    =========================================================================*/
+
+.musaoverEffekt:hover .textover h5, .musaoverEffekt:hover .textover p {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.musaoverEffekt:hover {
+    background-color: #151515;
+    transition: 0.6s;
+}
+
+.musaoverEffekt:hover > img {
+    opacity: 0.1;
+    transition: 0.6s;
+}
+
+.musaoverEffekt:hover > p {
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.musaoverEffekt:hover .filmThumbEid .eidTextover, .musaoverEffekt:hover .filmThumbEid .eidTextover p {
+    opacity: 0;
+    transition: .6s;
+}
+
+/*  ===========================================================================
+        MODAL
+    =========================================================================*/
+
+/*  Endrer på hvor mørk sida blir bak modaler */
+.modal-backdrop.show {
+    opacity: 0.8;
+}
+
+.modal #bilde {
+    max-height: 500px;
+    max-width: 100%;
+    height: auto;
+    width: auto;
+    border: 8px solid #222426;
+}
+
+#filmModalRow1 {
+    margin-top: -40px;
+}
+
+#filmModalCol1 {
+    margin-top: 40px;
+}
+
+/*      Close knappen
+    =========================================================================*/
+
+.filmModalClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #dcdcdc;
+    text-shadow: 0 2px 0 #000;
+    opacity: .5;
+    margin-right: 4px;
+}
+
+.filmModalClose:not(:disabled):not(.disabled) {
+    cursor: pointer;
+}
+
+.filmModalClose:not(:disabled):not(.disabled):hover, .filmModalClose:not(:disabled):not(.disabled):focus {
+    color: #dcdcdc;
+    text-decoration: none;
+    opacity: .75;
+}
+
+button.filmModalClose {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+
+/*      Bestill knappen
+    =========================================================================*/
+
+#bestillKnapp{
+    background-color: #294F4F;
+}
+
+#bestillKnapp:disabled,
+#bestillKnapp[disabled] {
+    background-color: #222426;
+    color: #505d5d;
+    border-color: #505d5d;
+    border-width: 3px;
+    opacity: 1;
+}
+
+#bestillKnapp.active {
+    background-color: #225E22;
+}
+
+/*  ===========================================================================
+        KNAPPER
+    =========================================================================*/
+
+.btn{
+    background-color: #294F4F;
+}
+
+.btn:hover {
+    background-color: #457a7a;
+}
+
+/*  ===========================================================================
+        HANDLEKURV TABELL
+    =========================================================================*/
+
+/* TODO: scrollbarstyling uten webkit? */
+.handlekurvWrapper {
+    display: block;
+    max-height: 70vh;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.handlekurvWrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.handlekurvWrapper::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+.handlekurvWrapper::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 10px;
+    outline: 1px solid gray;
+}
+
+/*  ===========================================================================
+        ALL ORDERS
+    =========================================================================*/
+
+.collapseAllOrders{
+    position: absolute
+}
+
+/*  ===========================================================================
+        (IKKE I BRUK) KARUSELL "SPLASH SCREEN" / "JUMBOTRON"
+    =========================================================================*/
+
+/*.karusell {
+    min-height: 250px;
+    width: 100%;
+    overflow: hidden;
+    margin-top: -30px;
+}
+
+.karusellBilde {
+    min-width: 1122px;
+    width: 100%;
+    min-height: 250px;
+    height: auto;
+}*/

@@ -1,0 +1,1 @@
+﻿Denne er her fordi den gjør App_Data eksisterer ved publish. Tom mappe gjør at mappen ikke bygges. 
